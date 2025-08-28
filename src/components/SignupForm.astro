@@ -1,0 +1,33 @@
+---
+// No es necesario importar nada aquí, ya que la lógica está en el script de abajo.
+---
+
+<form class="flex flex-col gap-4 p-6 border rounded-lg shadow-lg">
+  <h2 class="text-2xl font-bold text-center">Registrar Cuenta</h2>
+  <label class="flex flex-col">
+    <span class="text-sm font-medium">Nombre:</span>
+    <input type="text" name="name" required class="p-2 border rounded" />
+  </label>
+  <label class="flex flex-col">
+    <span class="text-sm font-medium">Correo Electrónico:</span>
+    <input type="email" name="email" required class="p-2 border rounded" />
+  </label>
+  <label class="flex flex-col">
+    <span class="text-sm font-medium">Contraseña:</span>
+    <input type="password" name="password" required class="p-2 border rounded" />
+  </label>
+  <button type="submit" class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+    Registrarse
+  </button>
+</form>
+
+<script>
+  // Importa la función de la lógica desde el archivo externo.
+  import { signupHandler } from "../scripts/signupLogic";
+
+  // Busca el formulario y adjunta el event listener.
+  const form = document.querySelector('form');
+  if (form) {
+    form.addEventListener('submit', signupHandler);
+  }
+</script>
