@@ -1,46 +1,97 @@
-# Astro Starter Kit: Basics
+# DashUp - Gestor de Proyectos
 
-```sh
-pnpm create astro@latest -- --template basics
+![DashUp Logo](public/images/logo.png)
+
+## 🚀 Demo en Vivo
+[Ver Demo](https://gestor-proyectos-dash-up.vercel.app/)
+
+## 📝 Descripción
+DashUp es una aplicación de gestión de proyectos construida con Astro y Firebase, que permite a equipos organizar y dar seguimiento a sus proyectos de manera eficiente.
+
+## 🛠️ Tecnologías
+- [Astro](https://astro.build/) - Framework Web
+- [Firebase](https://firebase.google.com/) - Backend y Autenticación
+- [TailwindCSS](https://tailwindcss.com/) - Estilos
+- [Vercel](https://vercel.com/) - Deployment
+
+## 📋 Prerequisitos
+- Node.js (versión 18 o superior)
+- pnpm
+- Cuenta de Firebase
+
+## 🔧 Instalación
+
+1. Clonar el repositorio
+```bash
+git clone https://github.com/yaquitadeveloper/gestor-proyectos-DashUp.git
+cd gestor-proyectos-DashUp
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+2. Instalar dependencias
+```bash
+pnpm install
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+3. Ejecutar en modo desarrollo
+```bash
+pnpm run dev
+```
 
-## 🧞 Commands
+## 📁 Estructura del Proyecto
+```
+gestor-proyectos-DashUp/
+├── src/
+│   ├── assets/
+│   │   ├── astro.svg
+│   │   └── background.svg
+│   ├── components/
+│   │   ├── Compañias.astro
+│   │   ├── Cta.astro
+│   │   ├── Features.astro
+│   │   ├── Footer.astro
+│   │   ├── Header.astro
+│   │   ├── Hero.astro
+│   │   ├── ModalSignup.astro
+│   │   ├── Testimonial.astro
+│   │   └── Welcome.astro
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── lib/
+│   │   ├── firebase-config.ts
+│   │   └── firebase.ts
+│   ├── pages/
+│   │   ├── dashboard.astro
+│   │   └── index.astro
+│   ├── scripts/
+│   │   └── signupLogic.ts
+│   └── styles/
+│       └── global.css
+└── public/
+    ├── images/
+    │   ├── mobile.png
+    │   └── trello2.jpg
+    └── favicon.svg
+```
 
-All commands are run from the root of the project, from a terminal:
+## 🚀 Scripts Disponibles
+- `pnpm run dev` - Inicia el servidor de desarrollo
+- `pnpm run build` - Construye el proyecto para producción
+- `pnpm run preview` - Previsualiza la build de producción
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+## 🔒 Variables de Entorno
+El proyecto usa las credenciales públicas de Firebase. Las credenciales están seguras para uso en frontend ya que:
+- Son públicas por diseño
+- La seguridad se maneja a través de las reglas de Firebase
+- Los permisos se gestionan por roles de usuario
 
-## 👀 Want to learn more?
+## 👥 Equipo
+Proyecto desarrollado por un equipo de 3 desarrolladores, cada uno con roles específicos gestionados a través de Firebase Console.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📄 Licencia
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para detalles
+
+## 🤝 Contribuciones
+Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir los cambios que te gustaría hacer.
+
+---
+Desarrollado con ❤️ por el equipo DashUp
