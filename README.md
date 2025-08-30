@@ -2,7 +2,6 @@
 
 <img src="public/images/logo.png" alt="DashUp Logo" width="200" height="auto" />
 
-// ...existing code...
 
 ## 🚀 Demo en Vivo
 [Ver Demo](https://gestor-proyectos-dash-up.vercel.app/)
