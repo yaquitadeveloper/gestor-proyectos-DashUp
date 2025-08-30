@@ -1,6 +1,8 @@
 # DashUp - Gestor de Proyectos
 
-![DashUp Logo](public/images/logo.png)
+<img src="public/images/logo.png" alt="DashUp Logo" width="200" height="auto" />
+
+
 
 ## 🚀 Demo en Vivo
 [Ver Demo](https://gestor-proyectos-dash-up.vercel.app/)
