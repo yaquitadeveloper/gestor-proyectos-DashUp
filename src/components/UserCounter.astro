@@ -1,0 +1,46 @@
+---
+import { db } from '../lib/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+
+// Este console.log solo aparecerá en la terminal del servidor
+console.log('Renderizando UserCounter en el servidor:', new Date().toISOString());
+
+let userCount = 0;
+try {
+  const querySnapshot = await getDocs(collection(db, "users"));
+  userCount = querySnapshot.size;
+} catch (error) {
+  console.error("Error al obtener usuarios:", error);
+}
+
+// Variable para mostrar cuándo se realizó el renderizado
+const renderTimestamp = new Date().toISOString();
+---
+
+<div class="user-counter">
+  <h2>Total de Usuarios Registrados:</h2>
+  <p class="count">{userCount}</p>
+  <p class="render-info">Renderizado en el servidor: {renderTimestamp}</p>
+</div>
+
+<style>
+  .user-counter {
+    padding: 2rem;
+    text-align: center;
+    background: #f3f4f6;
+    border-radius: 0.5rem;
+    margin: 1rem;
+  }
+
+  .count {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #2563eb;
+  }
+
+  .render-info {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 1rem;
+  }
+</style>
