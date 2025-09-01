@@ -334,9 +334,9 @@ const switchModal = (fromModal: string, toModal: string) => {
   }
 };
 
-// Event listeners cuando el DOM esté cargado
-document.addEventListener('DOMContentLoaded', () => {
-  console.log("DOM cargado, configurando event listeners");
+// Función para inicializar los event listeners
+const initializeModals = () => {
+  console.log("Inicializando modales...");
   
   // Elementos de los modales
   const loginModal = document.getElementById('login-modal');
@@ -361,6 +361,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Botones de Google
   const googleLoginBtn = document.getElementById('google-login-btn');
   const googleSignupBtn = document.getElementById('google-signup-btn');
+
+  console.log("Elementos encontrados:", {
+    loginModal: !!loginModal,
+    signupModal: !!signupModal,
+    openLoginBtns: openLoginBtns.length,
+    openSignupBtns: openSignupBtns.length,
+    closeLoginBtn: !!closeLoginBtn,
+    closeSignupBtn: !!closeSignupBtn
+  });
 
   // Abrir modal de login (desde cualquier botón)
   openLoginBtns.forEach(btn => {
@@ -450,7 +459,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   console.log("Event listeners configurados correctamente");
-});
+};
+
+// Función para verificar si el DOM está listo
+const waitForDOM = () => {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeModals);
+  } else {
+    // DOM ya está cargado
+    initializeModals();
+  }
+};
+
+// Inicializar cuando el script se carga
+waitForDOM();
+
+// También intentar inicializar después de un pequeño delay para asegurar que todo esté listo
+setTimeout(() => {
+  if (document.querySelectorAll('#open-login-modal').length > 0) {
+    console.log("Re-inicializando modales después del timeout");
+    initializeModals();
+  }
+}, 100);
 </script>
 
 <style>
