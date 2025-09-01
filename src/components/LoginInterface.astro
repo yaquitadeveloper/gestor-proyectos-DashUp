@@ -355,11 +355,17 @@ const initializeFirebase = async () => {
       }
 
       try {
-        console.log("Iniciando registro para:", email);
+        console.log("🚀 Iniciando registro para:", email);
+        console.log("📊 Datos del formulario:", { email, name });
         
+        // 1. Crear usuario en Firebase Auth
+        console.log("🔥 Creando usuario en Firebase Auth...");
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+        console.log("✅ Usuario creado en Auth:", user.uid);
         
+        // 2. Crear documento en Firestore
+        console.log("📝 Preparando datos para Firestore...");
         const userDocRef = doc(db, "users", user.uid);
         const userData = {
           name: name,
@@ -370,8 +376,12 @@ const initializeFirebase = async () => {
           uid: user.uid
         };
         
+        console.log("💾 Datos a guardar en Firestore:", userData);
+        console.log("📁 Referencia del documento:", userDocRef.path);
+        
+        console.log("💾 Intentando guardar en Firestore...");
         await setDoc(userDocRef, userData);
-        console.log("Documento guardado exitosamente en Firestore");
+        console.log("✅ Documento guardado exitosamente en Firestore");
 
         alert("¡Registro exitoso! Ya puedes iniciar sesión.");
         const modal = document.getElementById('signup-modal');
@@ -382,12 +392,20 @@ const initializeFirebase = async () => {
         window.location.href = "/dashboard";
 
       } catch (error: any) {
-        console.error("Error completo de registro:", error);
+        console.error("❌ Error completo de registro:", error);
+        console.error("❌ Código de error:", error.code);
+        console.error("❌ Mensaje de error:", error.message);
+        console.error("❌ Stack trace:", error.stack);
+        
         let errorMessage = "Ocurrió un error inesperado.";
         if (error.code === "auth/email-already-in-use") {
           errorMessage = "El correo electrónico ya está en uso.";
         } else if (error.code === "auth/weak-password") {
           errorMessage = "La contraseña es muy débil.";
+        } else if (error.code === "permission-denied") {
+          errorMessage = "Error de permisos en Firestore. Verifica las reglas.";
+        } else if (error.code === "unavailable") {
+          errorMessage = "Servicio no disponible. Intenta más tarde.";
         }
         alert(errorMessage);
       }
