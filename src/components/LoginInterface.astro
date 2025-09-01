@@ -487,16 +487,7 @@ const waitForDOM = () => {
 // Inicializar
 waitForDOM();
 
-// Respaldo
-setTimeout(() => {
-  if (document.querySelectorAll('#open-login-modal').length > 0) {
-    console.log("🔄 Re-inicializando después del timeout");
-    initializeModals();
-    if (!firebaseInitialized) {
-      initializeFirebase();
-    }
-  }
-}, 100);
+
 </script>
 
 <style>
