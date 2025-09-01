@@ -3,10 +3,10 @@
 // Estas credenciales son seguras para el frontend porque son públicas.
 // ¡NUNCA incluyas claves privadas de servicio aquí!
 export const firebaseConfig = {
-  apiKey: "AIzaSyAXy2KFlfcG13GR80A2dHaChxuGgxHaLig",
-  authDomain: "gestor-proyectos-f727b.firebaseapp.com",
-  projectId: "gestor-proyectos-f727b",
-  storageBucket: "gestor-proyectos-f727b.firebasestorage.app",
-  messagingSenderId: "985864176365",
-  appId: "1:985864176365:web:34e4123b062e819f7cc2e4",
+  apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY,
+  authDomain: import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.PUBLIC_FIREBASE_APP_ID,
 };
