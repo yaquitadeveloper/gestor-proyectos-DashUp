@@ -1,8 +1,5 @@
 // src/lib/firebase-config.ts
 
-// Estas credenciales son seguras para el frontend porque son públicas.
-// ¡NUNCA incluyas claves privadas de servicio aquí!
-
 // Debug: Verificar variables de entorno
 console.log("🔍 Debug - Variables de entorno:");
 console.log("PUBLIC_FIREBASE_API_KEY:", import.meta.env.PUBLIC_FIREBASE_API_KEY);

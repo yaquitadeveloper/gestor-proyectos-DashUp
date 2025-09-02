@@ -1,3 +1,159 @@
-<div>
-  <h1>Dashboard</h1>
+---
+import Layout from "../layouts/Layout.astro";
+import DashboardHeader from "../components/dashboard/DashBoardHeader.astro";
+import Sidebar from "../components/dashboard/Sidebar.astro";
+
+---
+<Layout title="Dashboard">
+
+  <div id="app-container" class="hidden h-screen">
+    <DashboardHeader />
+
+    <div class="flex h-screen">
+      <Sidebar />
+
+      <main class="flex-1 p-8">
+        <div class="max-w-4xl">
+          <h1 class="text-2xl font-semibold text-white mb-8">
+            TUS ESPACIOS DE TRABAJO
+          </h1>
+    
+          Espacio de trabajo Diseño UI
+          <div class="mb-8">
+            <div class="flex items-center space-x-4 mb-6">
+              <div
+                class="w-12 h-12 bg-pink-500 rounded flex items-center justify-center text-white font-bold text-xl"
+              >
+                D
+              </div>
+              <div>
+                <h2 class="text-xl font-semibold text-white">Diseño Ui</h2>
+              </div>
+              <div class="flex items-center space-x-4 ml-auto">
+                <button
+                  class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                    ></path>
+                  </svg>
+                  <span>Tableros</span>
+                </button>
+                <button
+                  class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                    ></path>
+                  </svg>
+                  <span>Miembros</span>
+                </button>
+                <button
+                  class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    ></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    ></path>
+                  </svg>
+                  <span>Configuración</span>
+                </button>
+                
+              </div>
+            </div>
+    
+            Tableros
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              Crear nuevo tablero
+              <button
+                class="bg-trello-gray hover:bg-trello-light-gray border-2 border-dashed border-gray-600 rounded-lg p-6 text-center transition-colors group"
+              >
+                <div class="text-gray-400 group-hover:text-white">
+                  <svg
+                    class="w-8 h-8 mx-auto mb-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                    ></path>
+                  </svg>
+                  <p class="text-sm">Crear un tablero nuevo</p>
+                </div>
+              </button>
+            </div>
+    
+            
+          </div>
+        </div>
+      </main> 
+
+    </div>
+  </div>
+  
+  
+<div class="flex h-screen">
+
+  
+
+  
+  
 </div>
+      
+</Layout>
+
+<script>
+  import { onAuthStateChanged } from "firebase/auth";
+  // La instancia 'auth' se importa solo una vez, en el script del cliente.
+  import { auth } from "../lib/firebase";
+
+  const appContainer = document.getElementById("app-container");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // El usuario está autenticado. Mostramos el dashboard.
+      if (appContainer) {
+        appContainer.classList.remove("hidden");
+      }
+    } else {
+      // El usuario no está autenticado. Lo redirigimos a la página de inicio.
+      window.location.href = "/";
+    }
+  });
+</script>
