@@ -1,13 +1,13 @@
 // src/lib/firebase-config.ts
 
 // Debug: Verificar variables de entorno
-console.log("🔍 Debug - Variables de entorno:");
-console.log("PUBLIC_FIREBASE_API_KEY:", import.meta.env.PUBLIC_FIREBASE_API_KEY);
-console.log("PUBLIC_FIREBASE_AUTH_DOMAIN:", import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN);
-console.log("PUBLIC_FIREBASE_PROJECT_ID:", import.meta.env.PUBLIC_FIREBASE_PROJECT_ID);
-console.log("PUBLIC_FIREBASE_STORAGE_BUCKET:", import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET);
-console.log("PUBLIC_FIREBASE_MESSAGING_SENDER_ID:", import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID);
-console.log("PUBLIC_FIREBASE_APP_ID:", import.meta.env.PUBLIC_FIREBASE_APP_ID);
+// console.log("🔍 Debug - Variables de entorno:");
+// console.log("PUBLIC_FIREBASE_API_KEY:", import.meta.env.PUBLIC_FIREBASE_API_KEY);
+// console.log("PUBLIC_FIREBASE_AUTH_DOMAIN:", import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN);
+// console.log("PUBLIC_FIREBASE_PROJECT_ID:", import.meta.env.PUBLIC_FIREBASE_PROJECT_ID);
+// console.log("PUBLIC_FIREBASE_STORAGE_BUCKET:", import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET);
+// console.log("PUBLIC_FIREBASE_MESSAGING_SENDER_ID:", import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID);
+// console.log("PUBLIC_FIREBASE_APP_ID:", import.meta.env.PUBLIC_FIREBASE_APP_ID);
 
 export const firebaseConfig = {
   apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY,
@@ -19,6 +19,6 @@ export const firebaseConfig = {
 };
 
 // Debug: Verificar configuración final
-console.log("🔧 Firebase Config:", firebaseConfig);
-console.log("🔧 Project ID específico:", firebaseConfig.projectId);
-console.log("🔧 Storage Bucket específico:", firebaseConfig.storageBucket);
+// console.log("🔧 Firebase Config:", firebaseConfig);
+// console.log("🔧 Project ID específico:", firebaseConfig.projectId);
+// console.log("🔧 Storage Bucket específico:", firebaseConfig.storageBucket);
