@@ -1,16 +1,23 @@
+---
+import { Icon } from 'astro-icon/components'
+
+
+---
+<!-- Header -->
 <header class="border-b border-gray-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <!-- Logo -->
           <div class="flex items-center space-x-2">
             <div
-              class="w-8 h-8 bg-trello-blue rounded flex items-center justify-center"
+              class="w-8 h-8 bg-black rounded flex items-center justify-center"
             >
-              <span class="text-white font-bold text-sm">D</span>
+            <span class="text-blue-400 font-bold text-lg">D</span>
+              
             </div>
             <div class="flex flex-col">
               <span class="text-xs text-gray-500 uppercase tracking-wide"
-                >PROYECTOS</span
+                >GESTOR</span
               >
               <span class="text-lg font-bold text-gray-900">DashUp</span>
             </div>
@@ -19,79 +26,23 @@
           <!-- Navigation -->
           <nav class="hidden md:flex items-center space-x-8">
             <div
-              class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 cursor-pointer"
+              class="flex items-center space-x-1 text-gray-600 hover:text-gray-900 cursor-pointer"
             >
               <span>Funciones</span>
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
+              <Icon name="flecha" size={20} />
             </div>
             <div
-              class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 cursor-pointer"
+              class="flex items-center space-x-1 text-gray-600 hover:text-gray-900 cursor-pointer"
             >
               <span>Soluciones</span>
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
+              <Icon name="flecha" size={20} />
             </div>
+            
             <div
-              class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 cursor-pointer"
-            >
-              <span>Planes</span>
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
-            </div>
-            <span class="text-gray-700 hover:text-gray-900 cursor-pointer"
-              >Precios</span
-            >
-            <div
-              class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 cursor-pointer"
+              class="flex items-center space-x-1 text-gray-600 hover:text-gray-900 cursor-pointer"
             >
               <span>Recursos</span>
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
+              <Icon name="flecha" size={20} />
             </div>
           </nav>
 

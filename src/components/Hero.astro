@@ -1,3 +1,9 @@
+---
+import { Icon } from 'astro-icon/components'
+
+
+---
+
 <!-- Hero Section -->
     <section
       class="relative overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50"
@@ -24,9 +30,7 @@
               id="video-btn"
               class="flex items-center space-x-2 text-trello-blue hover:text-trello-blue-dark font-medium transition-colors"
             >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
+              <Icon name="play" size={20} />
               <span>Ver el vídeo</span>
             </button>
           </div>
@@ -43,31 +47,32 @@
 
             <!-- Decorative elements -->
             <div
-              class="absolute top-10 right-10 w-20 h-20 bg-orange-400 rounded-lg transform rotate-12 opacity-80"
-            ></div>
+              class="absolute top-10 right-10 w-20 h-20 bg-white  shadow-lg rounded-lg transform rotate-12 opacity-80 flex items-center justify-center"
+            ><Icon name="slack" size={50} /></div>
+            
             <div
-              class="absolute bottom-20 right-0 w-16 h-16 bg-purple-500 rounded-full opacity-60"
-            ></div>
+              class="absolute bottom-20 right-0 w-16 h-16 bg-white shadow-lg rounded-full opacity-60 flex items-center justify-center"
+            ><Icon name="zoom" size={40} /></div>
             <div
-              class="absolute top-1/2 -right-10 w-12 h-12 bg-yellow-400 rounded transform -rotate-12 opacity-70"
-            ></div>
+              class="absolute top-1/2 -right-10 w-12 h-12 bg-white shadow-lg rounded transform -rotate-12 opacity-70 flex items-center justify-center"
+            ><Icon name="gmail" size={50} /></div>
 
             <!-- App icons -->
             <div class="absolute top-20 -right-5 space-y-4">
               <div
                 class="w-12 h-12 bg-white rounded-lg shadow-lg flex items-center justify-center"
               >
-                <div class="w-8 h-8 bg-red-500 rounded"></div>
+               <Icon name="twitter" size={40} />
               </div>
               <div
                 class="w-12 h-12 bg-white rounded-lg shadow-lg flex items-center justify-center"
               >
-                <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
+                <Icon name="messenger" size={50} class="text-blue-500" />
               </div>
               <div
                 class="w-12 h-12 bg-white rounded-lg shadow-lg flex items-center justify-center"
               >
-                <div class="w-8 h-8 bg-green-500 rounded"></div>
+                <Icon name="instagram" size={40} />
               </div>
             </div>
           </div>
