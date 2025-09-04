@@ -1,3 +1,8 @@
+---
+import { Icon } from 'astro-icon/components'
+
+---
+
 <header
       class="bg-white border-b border-gray-300 px-4 py-2 flex items-center justify-between"
     >
@@ -13,7 +18,7 @@
         </div>
       </div>
 
-      
+      <!-- Buscar -->
       <div class="flex-1 max-w-md mx-8">
         <div class="relative">
           <input
@@ -21,39 +26,14 @@
             placeholder="Buscar"
             class="w-full bg-trello-dark text-white placeholder-gray-400 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
           />
-          <svg
-            class="absolute right-3 top-2.5 w-5 h-5 text-gray-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            ></path>
-          </svg>
+          <Icon name="buscar" size={20} class="absolute right-3 top-2.5 text-gray-400" />
         </div>
       </div>
 
       
-      <div class="flex items-center space-x-3">
-        <button
-          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-medium transition-colors"
-        >
-          Crear
-        </button>
+      <div class="flex items-center space-x-6">
+       
         <div class="flex items-center space-x-2">
-          <button class="p-2 hover:bg-trello-light-gray rounded">
-            
-          </button>
-          <button class="p-2 hover:bg-trello-light-gray rounded">
-            
-          </button>
-          <button class="p-2 hover:bg-trello-light-gray rounded">
-           
-          </button>
          
           <div class="relative">
             <button
@@ -67,7 +47,7 @@
               id="userMenu"
               class="hidden absolute right-0 mt-2 w-80 bg-white text-black rounded-lg shadow-xl border z-50"
             >
-              <div class="p-4 border-b">
+               <div class="p-4"> <!--border-b -->
                 <div class="flex items-center space-x-3">
                   <div
                     class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center font-bold"
@@ -82,14 +62,7 @@
                   </div>
                 </div>
               </div>
-              <div class="py-2">
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100"
-                  >Cambiar cuentas</a
-                >
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100"
-                  >Gestionar cuenta</a
-                >
-              </div>
+              
               <div class="border-t py-2">
                 <div
                   class="px-4 py-1 text-xs font-semibold text-gray-500 uppercase"
@@ -99,47 +72,24 @@
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100"
                   >Perfil y visibilidad</a
                 >
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100"
-                  >Actividad</a
-                >
+                
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100"
                   >Tarjetas</a
                 >
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100"
-                  >Ajustes</a
-                >
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tema</a>
               </div>
               <div class="border-t py-2">
                 <button
                   class="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center"
                 >
-                  <svg
-                    class="w-4 h-4 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    ></path>
-                  </svg>
+                <Icon name="plus" size={20} />
                   Crear Espacio de trabajo
                 </button>
               </div>
-              <div class="border-t py-2">
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Ayuda</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100"
-                  >Accesos directos</a
-                >
-              </div>
+              
               <div class="border-t py-2">
                 <a
                   href="/."
-                  class="block px-4 py-2 hover:bg-gray-100 text-red-600"
+                  class="block px-4 py-2 hover:text-gray-600 text-gray-400"
                   >Cerrar sesión</a
                 >
               </div>
