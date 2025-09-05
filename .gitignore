@@ -25,7 +25,8 @@ pnpm-debug.log*
 
 tools/
 
-
 estructura.txt
+
+.vercel/
 
 
