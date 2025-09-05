@@ -74,29 +74,28 @@ import Sidebar from "../components/dashboard/Sidebar.astro";
     </div>
   </div>
   
-
-<div class="flex h-screen">
-
-  
-
-  
-  
-</div>
+  <!-- Loading state -->
+  <div id="loading-container" class="flex h-screen items-center justify-center">
+    <div class="text-white text-lg">Cargando...</div>
+  </div>
       
 </Layout>
 
 <script>
   import { onAuthStateChanged } from "firebase/auth";
-  // La instancia 'auth' se importa solo una vez, en el script del cliente.
   import { auth } from "../lib/firebase";
 
   const appContainer = document.getElementById("app-container");
+  const loadingContainer = document.getElementById("loading-container");
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // El usuario está autenticado. Mostramos el dashboard.
       if (appContainer) {
         appContainer.classList.remove("hidden");
+      }
+      if (loadingContainer) {
+        loadingContainer.style.display = "none";
       }
     } else {
       // El usuario no está autenticado. Lo redirigimos a la página de inicio.

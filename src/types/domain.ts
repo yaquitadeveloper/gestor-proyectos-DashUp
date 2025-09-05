@@ -2,28 +2,60 @@
 
 // Plano para un Espacio de Trabajo (Workspace)
 export interface Workspace {
-  id: string; // Su identificador único (texto)
-  name: string; // Su nombre, ej: "Trabajos de la Universidad" (texto)
-  boards: Board[]; // Una lista de Tableros.
+  id: string;
+  name: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+ 
 }
 
 // Plano para un Tablero (Board)
 export interface Board {
-  id: string; // Su identificador único (texto)
-  name: string; // Su nombre, ej: "Proyecto de Astro" (texto)
-  columns: Column[]; // Una lista de Columnas.
+  id: string;
+  name: string;
+  workspaceId: string;
+  ownerId: string;
+  members?: string[];
+  isPublic: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  
 }
 
 // Plano para una Columna (Column)
 export interface Column {
-  id: string; // Su identificador único (texto)
-  name: string; // Su nombre, ej: "Por Hacer" (texto)
-  tasks: Task[]; // Una lista de Tareas. '[]' significa "lista de".
+  id: string;
+  name: string;
+  boardId: string;
+  order: number;
+  createdAt: Date;
+  updatedAt: Date;
+ 
 }
 
 // Plano para una Tarea (Task)
 export interface Task {
-  id: string; // Su identificador único (texto)
-  title: string; // Su título (texto)
-  description?: string; // Su descripción (el '?' significa que es opcional)
+  id: string;
+  title: string;
+  description?: string;
+  columnId: string;
+  boardId: string;
+  order: number;
+  dueDate?: Date;
+  labels?: string[];
+  attachments?: string[];
+  assignees?: string[];
+  priority: 'low' | 'medium' | 'high';
+  createdBy: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Comment {
+  id: string;
+  taskId: string;
+  text: string;
+  authorId: string;
+  createdAt: Date;
 }

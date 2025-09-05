@@ -40,7 +40,7 @@ import { Icon } from 'astro-icon/components'
               id="userMenuBtn"
               class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center font-bold text-sm text-black hover:bg-yellow-400 transition-colors cursor-pointer"
             >
-              YR
+              <span id="userInitials">YR</span>
             </button>
             
             <div
@@ -52,11 +52,11 @@ import { Icon } from 'astro-icon/components'
                   <div
                     class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center font-bold"
                   >
-                    YR
+                    <span id="userInitialsMenu">YR</span>
                   </div>
                   <div>
-                    <div class="font-semibold">Yaqui Raquel</div>
-                    <div class="text-sm text-gray-600">
+                    <div class="font-semibold" id="userName">Yaqui Raquel</div>
+                    <div class="text-sm text-gray-600" id="userEmail">
                       yaquita2014@gmail.com
                     </div>
                   </div>
@@ -87,11 +87,12 @@ import { Icon } from 'astro-icon/components'
               </div>
               
               <div class="border-t py-2">
-                <a
-                  href="/."
-                  class="block px-4 py-2 hover:text-gray-600 text-gray-400"
-                  >Cerrar sesión</a
+                <button
+                  id="logoutBtn"
+                  class="w-full text-left px-4 py-2 hover:text-gray-600 text-gray-400"
                 >
+                  Cerrar sesión
+                </button>
               </div>
             </div>
           </div>
@@ -99,30 +100,9 @@ import { Icon } from 'astro-icon/components'
       </div>
     </header>
 
-    <script type="module">
-       // Funcionalidad del menú de usuario
-   const userMenuBtn = document.getElementById('userMenuBtn');
-        const userMenu = document.getElementById('userMenu');
-
-        userMenuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            userMenu.classList.toggle('hidden');
-        });
-
-        // Cerrar menú al hacer clic fuera
-        document.addEventListener('click', function(e) {
-            if (!userMenu.contains(e.target) && !userMenuBtn.contains(e.target)) {
-                userMenu.classList.add('hidden');
-            }
-        });
-
-        // Funcionalidad para crear nuevo tablero
-        // const createBoardBtn = document.querySelector('button[class*="bg-trello-gray"]');
-        // createBoardBtn.addEventListener('click', function() {
-        //     const boardName = prompt('Nombre del nuevo tablero:');
-        //     if (boardName) {
-        //         // Aquí podrías agregar la lógica para crear un nuevo tablero
-        //         alert(`Tablero "${boardName}" creado exitosamente!`);
-        //     }
-        // });
+    <script>
+      import { initializeHeader } from '../../scripts/headerManager';
+      
+      // Inicializar cuando el script se carga
+      initializeHeader();
     </script>
