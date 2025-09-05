@@ -9,10 +9,21 @@
           <h2 class="text-white text-2xl font-semibold">Iniciar Sesión</h2>
           <button id="close-login-modal" class="text-white/70 hover:text-white text-2xl cursor-pointer">×</button>
       </div>
+
+      <!-- Loading spinner -->
+            <div id="login-loading" class="hidden text-center mb-4">
+                <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                <p class="text-white/70 mt-2 text-sm">Iniciando sesión...</p>
+            </div>
+            
+            <!-- Error message -->
+            <div id="login-error" class="hidden bg-red-500/20 border border-red-500/50 rounded-lg p-3 mb-4">
+                <p class="text-red-200 text-sm"></p>
+            </div>
       
       <form id="login-form" class="space-y-6">
           <!-- Email field -->
-          <div>
+          <div class="relative">
               <input 
                   type="email" 
                   name="email"
@@ -23,7 +34,7 @@
           </div>
           
           <!-- Password field -->
-          <div>
+          <div class="relative">
               <input 
                   type="password" 
                   name="password"
@@ -86,21 +97,37 @@
           <h2 class="text-white text-2xl font-semibold">Crear Cuenta</h2>
           <button id="close-signup-modal" class="text-white/70 hover:text-white text-2xl cursor-pointer">×</button>
       </div>
+
+      <!-- Loading spinner -->
+      <div id="signup-loading" class="hidden text-center mb-4">
+          <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+          <p class="text-white/70 mt-2 text-sm">Creando cuenta...</p>
+      </div>
+            
+      <!-- Error message -->
+      <div id="signup-error" class="hidden bg-red-500/20 border border-red-500/50 rounded-lg p-3 mb-4">
+          <p class="text-red-200 text-sm"></p>
+      </div>
+            
+      <!-- Success message -->
+      <div id="signup-success" class="hidden bg-green-500/20 border border-green-500/50 rounded-lg p-3 mb-4">
+          <p class="text-green-200 text-sm"></p>
+      </div>
       
       <form id="signup-form" class="space-y-6">
           <!-- Name field -->
-          <div>
+          <div class="relative">
               <input 
                   type="text" 
                   name="name"
-                  placeholder="Nombre" 
+                  placeholder="Nombre completo" 
                   class="input-field w-full text-white pb-2 text-lg"
                   required
               >
           </div>
           
           <!-- Email field -->
-          <div>
+          <div class="relative">
               <input 
                   type="email" 
                   name="email"
@@ -111,14 +138,24 @@
           </div>
           
           <!-- Password field -->
-          <div>
+          <div class="relative">
               <input 
                   type="password" 
                   name="password"
-                  placeholder="Password" 
+                  placeholder="Contraseña" 
                   class="input-field w-full text-white pb-2 text-lg"
                   required
               >
+              <span class="error-message text-red-300 text-sm mt-1 block" style="display: none;"></span>
+              <div class="password-requirements mt-2 text-xs text-white/60">
+                  <p>La contraseña debe contener:</p>
+                  <ul class="list-disc list-inside mt-1 space-y-1">
+                      <li id="req-length" class="text-red-300">Al menos 8 caracteres</li>
+                      <li id="req-lower" class="text-red-300">Una letra minúscula</li>
+                      <li id="req-upper" class="text-red-300">Una letra mayúscula</li>
+                      <li id="req-number" class="text-red-300">Un número</li>
+                  </ul>
+              </div>
           </div>
           
           <!-- Sign Up button -->
@@ -168,6 +205,214 @@
 </div>
 
 <script>
+// ===== INTERFACES Y TIPOS =====
+interface ValidationResult {
+  valid: boolean;
+  message: string;
+  requirements?: {
+    hasLower: boolean;
+    hasUpper: boolean;
+    hasNumber: boolean;
+    hasLength: boolean;
+  };
+}
+
+interface PasswordRequirements {
+  length: boolean;
+  lower: boolean;
+  upper: boolean;
+  number: boolean;
+}
+
+// ===== UTILIDADES Y VALIDACIONES =====
+class ValidationUtils {
+  static validateEmail(email: string): ValidationResult {
+    if (!email?.trim()) {
+      return { valid: false, message: 'El email es obligatorio' };
+    }
+    
+    if (email.length < 5) {
+      return { valid: false, message: 'El email debe tener al menos 5 caracteres' };
+    }
+    
+    if (email.length > 254) {
+      return { valid: false, message: 'El email es demasiado largo' };
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return { valid: false, message: 'Por favor ingresa un email válido' };
+    }
+    
+    return { valid: true, message: '' };
+  }
+
+  static validatePassword(password: string, isSignup: boolean = false): ValidationResult {
+    if (!password?.trim()) {
+      return { valid: false, message: 'La contraseña es obligatoria' };
+    }
+    
+    const minLength = isSignup ? 8 : 6;
+    if (password.length < minLength) {
+      return { valid: false, message: `La contraseña debe tener al menos ${minLength} caracteres` };
+    }
+    
+    if (password.length > 128) {
+      return { valid: false, message: 'La contraseña es demasiado larga' };
+    }
+    
+    if (isSignup) {
+      const requirements = {
+        hasLower: /[a-z]/.test(password),
+        hasUpper: /[A-Z]/.test(password),
+        hasNumber: /\d/.test(password),
+        hasLength: password.length >= 8
+      };
+
+      if (!requirements.hasLower) {
+        return { valid: false, message: 'La contraseña debe contener al menos una letra minúscula' };
+      }
+      if (!requirements.hasUpper) {
+        return { valid: false, message: 'La contraseña debe contener al menos una letra mayúscula' };
+      }
+      if (!requirements.hasNumber) {
+        return { valid: false, message: 'La contraseña debe contener al menos un número' };
+      }
+
+      return { valid: true, message: '', requirements };
+    }
+    
+    return { valid: true, message: '' };
+  }
+
+  static validateName(name: string): ValidationResult {
+    if (!name?.trim()) {
+      return { valid: false, message: 'El nombre es obligatorio' };
+    }
+    
+    const trimmedName = name.trim();
+    if (trimmedName.length < 2) {
+      return { valid: false, message: 'El nombre debe tener al menos 2 caracteres' };
+    }
+    
+    if (trimmedName.length > 100) {
+      return { valid: false, message: 'El nombre es demasiado largo' };
+    }
+    
+    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
+    if (!nameRegex.test(trimmedName)) {
+      return { valid: false, message: 'El nombre solo puede contener letras y espacios' };
+    }
+    
+    return { valid: true, message: '' };
+  }
+}
+
+// ===== MANEJO DE UI =====
+class UIManager {
+  static showError(containerId: string, message: string): void {
+    const container = document.getElementById(containerId);
+    const errorP = container?.querySelector('p');
+    if (container && errorP) {
+      errorP.textContent = message;
+      container.classList.remove('hidden');
+    }
+  }
+
+  static hideError(containerId: string): void {
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.classList.add('hidden');
+    }
+  }
+
+  static showSuccess(containerId: string, message: string): void {
+    const container = document.getElementById(containerId);
+    const successP = container?.querySelector('p');
+    if (container && successP) {
+      successP.textContent = message;
+      container.classList.remove('hidden');
+    }
+  }
+
+  static showLoading(containerId: string, show: boolean = true): void {
+    const container = document.getElementById(containerId);
+    if (container) {
+      if (show) {
+        container.classList.remove('hidden');
+      } else {
+        container.classList.add('hidden');
+      }
+    }
+  }
+
+  static setButtonsDisabled(form: HTMLFormElement, disabled: boolean = true): void {
+    const buttons = form.querySelectorAll('button');
+    buttons.forEach((btn) => {
+      (btn as HTMLButtonElement).disabled = disabled;
+    });
+  }
+
+  static showFieldError(fieldName: string, message: string, form: Document | HTMLFormElement = document): void {
+    const field = form.querySelector(`input[name="${fieldName}"]`) as HTMLInputElement;
+    const errorSpan = field?.parentElement?.querySelector('.error-message') as HTMLElement;
+    
+    if (field && errorSpan) {
+      field.classList.add('border-red-500');
+      field.classList.remove('border-green-500');
+      errorSpan.textContent = message;
+      errorSpan.classList.remove('hidden');
+    }
+  }
+
+  static showFieldValid(fieldName: string, form: Document | HTMLFormElement = document): void {
+    const field = form.querySelector(`input[name="${fieldName}"]`) as HTMLInputElement;
+    const errorSpan = field?.parentElement?.querySelector('.error-message') as HTMLElement;
+    
+    if (field && errorSpan) {
+      field.classList.remove('border-red-500');
+      field.classList.add('border-green-500');
+      errorSpan.classList.add('hidden');
+      errorSpan.textContent = '';
+    }
+  }
+
+  static clearFieldErrors(form: HTMLFormElement): void {
+    const inputs = form.querySelectorAll('input');
+    const errorMessages = form.querySelectorAll('.error-message');
+    
+    inputs.forEach((input: HTMLInputElement) => {
+      input.classList.remove('border-red-500', 'border-green-500');
+    });
+    
+    errorMessages.forEach((error) => {
+      error.classList.add('hidden');
+      error.textContent = '';
+    });
+  }
+
+  static updatePasswordRequirements(password: string): void {
+    const requirements: PasswordRequirements = {
+      length: password.length >= 8,
+      lower: /[a-z]/.test(password),
+      upper: /[A-Z]/.test(password),
+      number: /\d/.test(password)
+    };
+
+    Object.keys(requirements).forEach((req: string) => {
+      const element = document.getElementById(`req-${req}`);
+      if (element) {
+        if (requirements[req as keyof PasswordRequirements]) {
+          element.classList.remove('text-red-300');
+          element.classList.add('text-green-300');
+        } else {
+          element.classList.remove('text-green-300');
+          element.classList.add('text-red-300');
+        }
+      }
+    });
+  }
+}  
 // ===== LÓGICA DE MODALES (INDEPENDIENTE DE FIREBASE) =====
 // Forzar redeploy en Vercel para variables de entorno
 console.log("🚀 Iniciando lógica de modales...");
