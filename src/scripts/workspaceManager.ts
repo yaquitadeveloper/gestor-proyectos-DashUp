@@ -1,9 +1,4 @@
-
-// Import de tipo
-import type { Workspace } from '../types/domain';
-
-// Import de valor (const, funciones, etc.)
-import { WORKSPACE_LIMITS } from '../types/domain';
+import { type Workspace, WORKSPACE_LIMITS } from '../types/domain';
 import type { WorkspaceInvitation } from '../types/domain';
 
 
@@ -59,7 +54,7 @@ export async function createWorkspace(name: string, description: string, ownerId
       updatedAt: new Date()
     });
     
-    console.log('✅ Workspace creado:', docRef.id);
+    
     return docRef.id;
   } catch (error) {
     console.error('❌ Error creando workspace:', error);

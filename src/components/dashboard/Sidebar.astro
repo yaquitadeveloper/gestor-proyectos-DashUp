@@ -1,7 +1,4 @@
----
-// import { Icon } from 'astro-icon/components'
 
----
 
 <aside class="w-64 bg-gray-100 border-r border-gray-300 flex flex-col">
   <!-- Botón para crear nuevo workspace -->
@@ -26,6 +23,7 @@
 
 <script>
   import { initializeSidebar } from '../../scripts/sidebarManager';
+  import { createWorkspace } from '../../scripts/workspaceManager';
   
   // Función para esperar a que el DOM esté listo
   function waitForDOM(): Promise<void> {
@@ -48,8 +46,33 @@
     
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log('👤 Usuario autenticado:', user.email);
         initializeSidebar(user.uid);
+
+        const createWorkspaceBtn = document.getElementById('createWorkspaceBtn');
+        if (createWorkspaceBtn) {
+          createWorkspaceBtn.addEventListener('click', async () => {
+            const workspaceName = prompt("Ingresa el nombre del nuevo espacio de trabajo:");
+            if (workspaceName) {
+              try {
+                // Aquí, 'description' es un valor por defecto. Deberías obtenerlo de un formulario real.
+                const newWorkspaceId = await createWorkspace(workspaceName, 'Descripción por defecto', user.uid);
+               
+                
+                // Actualizar la lista de workspaces para mostrar el nuevo
+                initializeSidebar(user.uid);
+              } catch (error) {
+                console.error('❌ Error al crear workspace:', error);
+                if (error instanceof Error) {
+                  alert(error.message);
+                } else {
+                  alert(String(error));
+                }
+                
+              }
+            }
+          });
+        }
+        
       } else {
         console.log('🔓 Usuario no autenticado');
       }

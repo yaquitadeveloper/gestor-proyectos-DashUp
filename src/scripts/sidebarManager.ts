@@ -1,11 +1,5 @@
-// Import de tipo
-import type { Workspace } from '../types/domain';
 
-// Import de valor (const, funciones, etc.)
-import { WORKSPACE_LIMITS } from '../types/domain';
-
-
-
+import { type Workspace, WORKSPACE_LIMITS } from '../types/domain';
 
 export async function initializeSidebar(userId: string): Promise<void> {
   try {

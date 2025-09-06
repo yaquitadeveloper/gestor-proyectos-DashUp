@@ -33,14 +33,7 @@ export const initializeModals = () => {
   const switchToSignupBtn = document.getElementById('switch-to-signup');
   const switchToLoginBtn = document.getElementById('switch-to-login');
 
-  console.log("📊 Elementos encontrados:", {
-    loginModal: !!loginModal,
-    signupModal: !!signupModal,
-    openLoginBtns: openLoginBtns.length,
-    openSignupBtns: openSignupBtns.length,
-    closeLoginBtn: !!closeLoginBtn,
-    closeSignupBtn: !!closeSignupBtn
-  });
+ 
 
   // Abrir modal de login
   openLoginBtns.forEach(btn => {

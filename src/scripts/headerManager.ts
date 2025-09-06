@@ -25,7 +25,7 @@ function getInitials(name: string): string {
 // Función para actualizar la información del usuario en el header
 async function updateUserInfo(user: any): Promise<void> {
   try {
-    console.log('👤 Actualizando información del usuario:', user.email);
+    
     
     // Importar Firebase dinámicamente
     const { db } = await import("../lib/firebase");
@@ -42,7 +42,7 @@ async function updateUserInfo(user: any): Promise<void> {
       if (userDoc.exists()) {
         const userData = userDoc.data();
         displayName = userData.name || displayName;
-        console.log('�� Datos obtenidos de Firestore:', userData);
+        
       }
     } catch (firestoreError) {
       console.warn('⚠️ No se pudieron obtener datos de Firestore, usando datos de Auth:', firestoreError);
@@ -62,7 +62,7 @@ async function updateUserInfo(user: any): Promise<void> {
     if (userInitialsElement) userInitialsElement.textContent = initials;
     if (userInitialsMenuElement) userInitialsMenuElement.textContent = initials;
     
-    console.log('✅ Información del usuario actualizada:', { displayName, email, initials });
+   
     
   } catch (error) {
     console.error('❌ Error al actualizar información del usuario:', error);
@@ -135,7 +135,7 @@ export async function initializeHeader(): Promise<void> {
     // Escuchar cambios en el estado de autenticación
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log('🔐 Usuario autenticado detectado:', user.email);
+        
         updateUserInfo(user);
       } else {
         console.log('🔓 Usuario no autenticado');
