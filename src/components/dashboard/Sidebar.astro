@@ -1,58 +1,60 @@
 ---
-import { Icon } from 'astro-icon/components'
+// import { Icon } from 'astro-icon/components'
 
 ---
 
-      <aside class="w-64 bg-gray-100 border-r border-gray-300 flex flex-col">
-       
-        <div class="px-4 py-2">
-          <h3 class="text-xs font-semibold text-gray-400 uppercase mb-2">
-            Espacios de trabajo
-          </h3>
-          <div class="space-y-1">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-2">
-                <div
-                  class="w-6 h-6 bg-pink-500 rounded flex items-center justify-center text-xs font-bold"
-                >
-                  D
-                </div>
-                <span class="text-gray-800 text-sm">Diseño Ui</span>
-              </div>
-              <button class="text-gray-400 hover:text-white">
-                <Icon name="flecha" size={20} />
-              </button>
-            </div>
+<aside class="w-64 bg-gray-100 border-r border-gray-300 flex flex-col">
+  <!-- Botón para crear nuevo workspace -->
+  <div class="p-4 border-b">
+    <button id="createWorkspaceBtn" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
+      + Crear Espacio de Trabajo
+    </button>
+  </div>
 
+  <!-- Lista dinámica de workspaces -->
+  <div class="flex-1 overflow-y-auto">
+    <div class="px-4 py-2">
+      <h3 class="text-xs font-semibold text-gray-400 uppercase mb-2">
+        Espacios de trabajo
+      </h3>
+      <div id="workspacesList" class="space-y-1">
+        <!-- Se llenará dinámicamente -->
+      </div>
+    </div>
+  </div>
+</aside>
 
-           <!-- Espacio de trabajo -->
-            <h3 class="text-gray-800">Espacio de trabajo</h3>
-            <div class="ml-8 space-y-1 ">
-              <a
-                href="#"
-                class="flex items-center space-x-2 text-black hover:bg-blue-500 px-2 py-1 rounded text-sm transition-colors"
-              >
-              <Icon name="tablero" size={20} />
-                <span>Tableros</span>
-              </a>
-              <a
-                href="#"
-                class="flex items-center space-x-2 text-black hover:bg-blue-500 px-2 py-1 rounded text-sm transition-colors"
-              >
-              <Icon name="mienbros" size={20} />
-                <span>Miembros</span>
-                <button class="text-gray-400 hover:text-white ml-auto">
-                  <Icon name="plus" size={20} />
-                </button>
-              </a>
-              <a
-                href="#"
-                class="flex items-center space-x-2 text-black hover:bg-blue-500 px-2 py-1 rounded text-sm transition-colors"
-              >
-              <Icon name="configuracion" size={20} />
-                <span>Configuración</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </aside>
+<script>
+  import { initializeSidebar } from '../../scripts/sidebarManager';
+  
+  // Función para esperar a que el DOM esté listo
+  function waitForDOM(): Promise<void> {
+    return new Promise((resolve) => {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => resolve());
+      } else {
+        resolve();
+      }
+    });
+  }
+
+  // Inicializar sidebar cuando esté listo
+  async function init() {
+    await waitForDOM();
+    
+    // Obtener el usuario autenticado
+    const { onAuthStateChanged } = await import("firebase/auth");
+    const { auth } = await import("../../lib/firebase");
+    
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log('👤 Usuario autenticado:', user.email);
+        initializeSidebar(user.uid);
+      } else {
+        console.log('🔓 Usuario no autenticado');
+      }
+    });
+  }
+
+  init();
+</script>
